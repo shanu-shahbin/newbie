@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES8VFXF5B7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ES8VFXF5B7');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'logo-no-background.svg' %}" type="image/svg+xml">
+    <title>Newbieos</title>
+    <link rel="stylesheet" href="{% static 'css/splash.css' %}">
+</head>
+<body>
+    <!-- Include the SVG logo here -->
+    <img src="{% static 'logo-color.svg' %}" alt="Newbieos Logo">
+
+    
+    <script>
+        // Apply smooth fade-out effect and redirect to index page
+        setTimeout(function() {
+            var logo = document.getElementById("logo");
+            logo.classList.add("fade-out"); // Add fade-out class to initiate the effect
+        }, 1500); // Delay before starting the fade-out effect
+
+        // Redirect to index page after the fade-out completes
+        setTimeout(function() {
+            window.location.href = "/index";  // Adjust the URL if necessary
+        }, 3000); // Total delay before redirection
+    </script>
+</body>
+</html>

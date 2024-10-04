@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES8VFXF5B7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ES8VFXF5B7');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="{% static 'logo-no-background.svg' %}" type="image/svg+xml">
+    <title>About | NewbieOs</title>    
+</head>
+<body>
+      <!-- Include Navbar -->
+      {% include 'navbar.html' %}
+    {% for i in footers %}
+      <div class="container">
+        <h1>The NewbieOs</h1>
+        <p>NewbieOs was created by software engineers Founder 
+            <a href="{{i.shanu_url}}" target="_blank">Shanu Shahbin</a> 
+            and Co-Founder
+            <a href="{{i.ak_url}}" target="_blank">Akshay MV</a> 
+            with a clear mission: to tackle the high unemployment rate among freshers in India. As of 2024, India faces an unemployment rate of around 7.5%, with freshers particularly affected. NewbieOs is here to change that by offering a platform dedicated to connecting freshers with job opportunities tailored to their skills.
+        </p>
+        
+        <p>Designed specifically for candidates with 0 to 2 years of experience, NewbieOs integrates over 100 job portals into one seamless experience. Our platform features handpicked jobs to ensure relevance and quality, while actively filtering out scam job listings, so you can focus on genuine opportunities. With the power of AI-driven recommendations, we help you discover jobs that match your profile, reducing the job search time from weeks to just a few hours.</p>
+        
+        <p>NewbieOs is not just about finding jobs — it's about providing hope, streamlining the process, and helping India’s talented freshers connect with top companies and startups. Whether you’re seeking positions in IT, finance, design, or any other field, NewbieOs helps you get one step closer to your dream job.</p>
+    </div>
+    {% endfor %}
+    
+
+    <div class="numbers-section">
+        <h2>Our Reach</h2>
+        <h7>Join our growing community of job seekers and freshers looking to kickstart their careers.</h7>
+        <div class="number" id="userCount" data-target="{{ user_count }}"></div>
+
+        <h7>Registered Users (from of 2024)</h7>
+    </div>
+
+    <!-- Include Footer -->
+    {% include 'footer.html' %}
+
+    <script>
+      // JavaScript to create the loading effect for the user count
+      const countElement = document.getElementById('userCount');
+      const targetNumber = parseInt(countElement.getAttribute('data-target'));
+      let currentNumber = Math.floor(Math.random() * (targetNumber - 1)); // Start from a random number below the target
+      const duration = 2000; // 2 seconds
+      const intervalTime = 10;
+      const increment = targetNumber / (duration / intervalTime);
+  
+      const updateCount = () => {
+          currentNumber += increment;
+          if (currentNumber >= targetNumber) {
+              currentNumber = targetNumber; // Stop at the target number
+              clearInterval(countInterval);
+          }
+          countElement.textContent = Math.floor(currentNumber).toLocaleString(); // Format number with commas
+      };
+  
+      const countInterval = setInterval(updateCount, intervalTime);
+  </script>
+
+</body>
+</html>

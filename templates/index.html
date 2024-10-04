@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Newbieos{% endblock %}
+
+{% block content %}
+    <!-- Job Search Section -->
+    <div class="word-cloud-container">
+        <div class="word-cloud">
+            {% for category in category %}
+                <a href="{% url 'category' category.id %}"><span style="color: #fff;">{{ category.name }}</span></a>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Job Search Section -->
+    <section class="search-section">
+        <h2>Discover fresher jobs</h2>
+        <p>Explore 100+ job portals and discover your dream job in top companies and startups across India.</p>
+        <form class="search-form" method="GET" action="{% url 'job_search' %}" onsubmit="validateForm(event)">
+            <input type="text" name="query" placeholder="Job title, keywords..." class="search-input" value="{{ query }}">
+            <input type="text" name="location" placeholder="Location" class="location-input" value="{{ location_query }}">
+            <button type="submit" class="search-btn">Find jobs</button>
+        </form>
+    </section>
+
+    <section class="section-container">
+        <h1 class="section-title">Why you should <span>Choose NewbieOs?</span></h1>
+        <p class="section-subtitle">One-Stop Fresher Job Solution – Access 100+ job portals in a single platform.</p>
+
+        <div class="stats-container">
+            <div class="stat-box">
+                <h2>100+</h2>
+                <p>Job Portals Integrated</p>
+            </div>
+            <div class="stat-box">
+                <h2>2000+</h2>
+                <p>Top Companies & Startups Listed</p>
+            </div>
+            <div class="stat-box">
+                <h2>95%</h2>
+                <p>Faster Job Search Process</p>
+            </div>
+            <div class="stat-box">
+                <h2>5x</h2>
+                <p>Faster Placement for Freshers</p>
+        </div>
+        </div>
+        
+        {% for link in footers %}
+        <a href="{{link.whatsapp_channel_url}}" class="request-demo-btn">Join Our Broadcast Channel</a>
+    {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES8VFXF5B7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ES8VFXF5B7');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{% static 'logo-no-background.svg' %}" type="image/svg+xml">
+    <title>Job details | NewbieOs</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+    <link rel="stylesheet" href="{% static 'css/job_detail.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+
+    <div class="job_container">
+        <div class="top-right-icons">
+    
+            <!-- Share Job Button -->
+            <a href="#" title="Share Job" onclick="shareJob('{{ job.id }}', '{{ job.job_title }}', '{{ job.company.company_name }}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                    <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/>
+                </svg>
+            </a>
+        </div>
+       
+        
+    
+        <!-- Display Company Logo -->
+        
+        
+        <h1 class="job_head">{{ job.job_title }}</h1>
+        
+        <div class="job-details">
+            {% if job.company %}
+                <p><strong><i class="fas fa-building"></i> Company Name:</strong> {{ job.company }}</p>
+            {% endif %}
+            
+            {% if job.job_applylast_date %}
+                <p><strong><i class="fas fa-calendar-alt"></i> Apply Last Date:</strong> {{ job.job_applylast_date }}</p>
+            {% endif %}
+            
+            {% if job.experience_level %}
+                <p><strong><i class="fas fa-briefcase"></i> Experience Level:</strong> {{ job.experience_level }} years</p>
+            {% endif %}
+            
+            {% if job.work_mode %}
+                <p><strong><i class="fas fa-laptop-house"></i> Work Mode:</strong> {{ job.work_mode }}</p>
+            {% endif %}
+            
+            {% if job.Location.location %}
+                <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> {{ job.Location.location }}</p>
+            {% endif %}
+            
+            {% if job.company.employees %}
+                <p><strong><i class="fas fa-users"></i> Company Size:</strong> {{ job.company.employees }} employees</p>
+            {% endif %}
+            
+            {% if job.pay_range %}
+                <p><strong><i class="fas fa-money-bill-wave"></i> Pay Range:</strong> {{ job.pay_range }} LPA</p>
+            {% endif %}
+            
+            {% if job.job_type %}
+                <p><strong><i class="fas fa-clipboard-list"></i> Job Type:</strong> {{ job.job_type }}</p>
+            {% endif %}
+            
+            {% if job.openings %}
+                <p><strong><i class="fas fa-folder-open"></i> Openings:</strong> {{ job.openings }}</p>
+            {% endif %}
+        </div>
+        
+    
+        <div class="section">
+            <h2>Responsibilities</h2>
+            {{ job.responsibilities | safe }}
+        </div>
+    
+        <div class="section">
+            <h2>Requirements</h2>
+            {{ job.qualifications | safe }}
+        </div>
+    
+        <div class="section">
+            <h2>Skill Set</h2>
+            <div class="sk">
+            {% if job.skill1 %}
+                <div class="badge">{{ job.skill1 }}</div>
+            {% endif %}
+            {% if job.skill2 %}
+                <div class="badge">{{ job.skill2 }}</div>
+            {% endif %}
+            {% if job.skill3 %}
+                <div class="badge">{{ job.skill3 }}</div>
+            {% endif %}
+            {% if job.skill4 %}
+                <div class="badge">{{ job.skill4 }}</div>
+            {% endif %}
+            {% if job.skill5 %}
+            <div class="badge">{{ job.skill5 }}</div>
+            {% endif %}
+            {% if job.skill6 %}
+            <div class="badge">{{ job.skill6 }}</div>
+            {% endif %}
+            </div>
+        </div>
+
+        <a href="{% if user.is_authenticated %}{{ job.job_url }}{% else %}{% url 'login' %}{% endif %}" 
+        class="apply-btn" style="background-color: #16325b;">
+        Apply for this Job 
+        </a>
+
+        
+    </a>
+    </div>
+
+    <!-- Include Footer -->
+    {% include 'footer.html' %}
+
+</body>
+
+<script>
+    function shareJob(jobId, jobTitle, companyName) {
+        const jobLink = window.location.origin + "/job/" + jobId;  // Generate job URL
+        const shareMessage = `Check out this job opportunity at ${companyName}: ${jobTitle}! Apply here: ${jobLink}`;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: `${jobTitle} at ${companyName}`,
+                text: shareMessage,
+                url: jobLink,
+            }).then(() => {
+                console.log('Job shared successfully');
+            }).catch(console.error);
+        } else {
+            alert("Your browser does not support the share feature. Please copy the link to share manually.");
+        }
+    }
+
+    function shareOnWhatsApp(jobId, jobTitle, companyName) {
+        const jobLink = window.location.origin + "/job/" + jobId;  // Generate job URL
+        const shareMessage = `Check out this job opportunity at ${companyName}: ${jobTitle}! Apply here: ${jobLink}`;
+        const whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`;
+        window.open(whatsappURL, '_blank');
+    }
+
+    function copyJobLink(jobId) {
+        const jobLink = window.location.origin + "/job/" + jobId;  // Generate job URL
+        navigator.clipboard.writeText(jobLink).then(() => {
+            alert('Job link copied to clipboard! You can now paste it on Instagram.');
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+</script>
+
+</html>

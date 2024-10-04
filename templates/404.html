@@ -1,0 +1,26 @@
+  {% load static %}
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES8VFXF5B7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ES8VFXF5B7');
+    </script>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Page Not Found</title>
+      <link rel="stylesheet" href="{% static 'css/404.css' %}">
+  </head>
+  <body>
+      <div class="container">
+          <h1>404 - Page Not Found</h1>
+          <p>Sorry, the page you are looking for does not exist.</p>
+          <p><a href="{% url 'index' %}">Go back to the homepage</a></p>
+      </div>
+  </body>
+  </html>

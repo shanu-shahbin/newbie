@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES8VFXF5B7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ES8VFXF5B7');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{% static 'logo-no-background.svg' %}" type="image/svg+xml">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}freshers Job Search in newbieos{% endblock %}</title>
+    <meta name="description" content="Find the best jobs and career opportunities with our advanced job search engine. Search by job title, company, and location.">
+    <meta name="keywords" content="job search, career, employment, job listings, jobs near me, job opportunities">
+    <meta name="author" content="NewbieOs">
+    
+    <!-- Open Graph Meta Tags (for social sharing) -->
+    <meta property="og:title" content="Find Your Dream Job | Job Search">
+    <meta property="og:description" content="Explore thousands of job listings and find your next career move.">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Find Your Dream Job | Job Search">
+    <meta name="twitter:description" content="Explore thousands of job listings and find your next career move.">
+    <meta name="twitter:image" content="{% static 'images/twitter-image.jpg' %}">
+    <meta name="twitter:site" content="@YourTwitterHandle">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script>
+        function validateForm(event) {
+            const query = document.querySelector('.search-input').value.trim();
+            const location = document.querySelector('.location-input').value.trim();
+
+            // Check if both fields are empty
+            if (!query && !location) {
+                alert("Please enter at least a job title or location.");
+                event.preventDefault(); // Prevent form submission
+            }
+        }
+    </script>
+    
+    <script>
+        function scatterWords() {
+            const words = document.querySelectorAll('.word-cloud span');
+            const margin = 20; // Set margin to prevent words from being too close
+            const maxAttempts = 100; // Maximum attempts to place a word without collision
+            
+            words.forEach(word => {
+                let x, y, attempts = 0;
+                let collision;
+
+                do {
+                    x = Math.random() * (document.querySelector('.word-cloud').clientWidth - word.clientWidth - margin);
+                    y = Math.random() * (document.querySelector('.word-cloud').clientHeight - word.clientHeight - margin);
+                    word.style.left = `${x}px`;
+                    word.style.top = `${y}px`;
+
+                    collision = false;
+                    words.forEach(otherWord => {
+                        if (otherWord !== word) {
+                            const otherRect = otherWord.getBoundingClientRect();
+                            const wordRect = word.getBoundingClientRect();
+                            
+                            if (
+                                wordRect.left < otherRect.right &&
+                                wordRect.right > otherRect.left &&
+                                wordRect.top < otherRect.bottom &&
+                                wordRect.bottom > otherRect.top
+                            ) {
+                                collision = true;
+                            }
+                        }
+                    });
+
+                    attempts++;
+                } while (collision && attempts < maxAttempts);
+            });
+        }
+
+        window.addEventListener('load', scatterWords);
+        window.addEventListener('resize', scatterWords); // Re-scatter words on window resize
+    </script>
+    
+    <script>
+        // Wait for the window to finish loading
+        window.addEventListener('load', function() {
+            // Hide the preloader
+            var preloader = document.getElementById('preloader');
+            preloader.style.display = 'none';
+            
+            // Show the main content
+            var mainContent = document.getElementById('main-content');
+            mainContent.style.display = 'block';
+        });
+
+        window.addEventListener('load', function() {
+            var preloader = document.getElementById('preloader');
+            preloader.classList.add('fade-out'); // Add fade-out class
+            
+            // Remove preloader completely after the fade-out
+            setTimeout(function() {
+                preloader.style.display = 'none';
+            }, 500); // Match the duration of the fade-out
+        });
+    </script>
+</head>
+
+<body>
+    
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Main Content -->
+    <div id="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Include Footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

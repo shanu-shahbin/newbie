@@ -1,0 +1,85 @@
+{% load static %}
+{% load custom_filters %}  <!-- Load your custom filters -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES8VFXF5B7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ES8VFXF5B7');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{% static 'logo-no-background.svg' %}" type="image/svg+xml">
+    <title>Jobs | NewbieOs</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Job Search Section -->
+    <section class="search-section">
+        {% if jobs %}
+            <h4 style="display: inline;">{{ category }}</h4> jobs 
+        {% else %}
+            <h4 style="display: inline;">No jobs found</h4>
+        {% endif %}
+    </section>
+
+    <section class="job-listing">
+        <div class="job-listing-container">
+            {% for job in jobs %}
+            <div class="job-card">
+                <h3><i class="fas fa-briefcase"></i> {{ job.job_title }}</h3> <!-- Job icon -->
+                <p class="company"><i class="fas fa-building"></i> {{ job.company }}</p>
+                <div class="location-time">
+                    <p><i class="fas fa-map-marker-alt"></i> {{ job.Location.location }}</p> <!-- Location icon -->
+                    <p><i class="fas fa-calendar-alt"></i> {{ job.job_posted_date }}</p> <!-- Date icon -->
+                </div>
+                <p class="job-desc">{{ job.responsibilities|truncate_rich_text:30 }}</p>  <!-- Truncated responsibilities -->
+                <a href="{% url 'job_details' job.id %}" class="details-btn" style="text-decoration: none;">Details</a>
+                </a>
+            </div>
+            {% empty %}
+            <p>No jobs found matching your criteria.</p>
+            {% endfor %}
+        </div>
+    </section>
+    {% if jobs %}
+    <div class="pagination p8">
+        <ul>
+            {% if jobs.has_previous %}
+                <li>
+                    <a class="prev" href="?page={{ jobs.previous_page_number }}&query={{ query }}&location={{ location_query }}">Prev</a>
+                </li>
+            {% endif %}
+
+            <li class="is-active">Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}</li>
+
+            {% if jobs.has_next %}
+                <li>
+                    <a class="next" href="?page={{ jobs.next_page_number }}&query={{ query }}&location={{ location_query }}" style="text-decoration: none;">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Include Footer -->
+    {% include 'footer.html' %}
+
+</body>
+
+</html>

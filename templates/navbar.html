@@ -1,0 +1,24 @@
+<header class="header">
+    <nav class="navbar">
+        <!-- Left Side: Companies -->
+        <div class="navbar-left">
+            <a href="{% url 'company_list' %}">Companies</a>
+        </div>
+
+        <!-- Center: Title -->
+        <div class="navbar-center">
+            <a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">
+                <h1 style="margin: 0; color: #ffff11;"><span class="logo-bold">New</span><span class="logo-color">bie</span>Os</h1>
+            </a>
+        </div>
+
+        <!-- Right Side: Login -->
+        <div class="navbar-right">
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Sign in</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>

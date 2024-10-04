@@ -1,0 +1,43 @@
+<section id="footer-container">
+    <footer>
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+        <p>Get In Touch</p>
+        {% for link in footers %}
+        <ul class="social-icons">
+            {% if link.linked_url %}
+            <li><a href="{{ link.linked_url }}"><i class="fab fa-linkedin"></i></a></li>
+            {% endif %}
+            {% if link.youtube_url %}
+            <li><a href="{{ link.youtube_url }}"><i class="fab fa-youtube"></i></a></li>
+            {% endif %}
+            {% if link.insta_url %}
+            <li><a href="{{ link.insta_url }}"><i class="fab fa-instagram"></i></a></li>
+            {% endif %}
+            {% if link.telegram_url %}
+            <li><a href="{{ link.telegram_url }}"><i class="fab fa-telegram"></i></a></li>
+            {% endif %}
+            {% if link.phone_number %}
+            <li><a href="https://wa.me/{{ link.phone_number }}" target="_blank"><i class="fab fa-whatsapp"></i></a></li> 
+            <li>
+                <a href="mailto:newbieos.contact@gmail.com">
+                  <i class="fab fa-google"></i>
+                </a>
+              </li>
+            {% endif %}
+        </ul>
+        {% endfor %}
+        <ul class="menu">
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'privacy' %}">privacy policy</a></li>
+        </ul>
+        {% for link in footers %}
+        <p >&copy; <script>document.write(new Date().getFullYear())</script> NewbieOs. All rights reserved & Unauthorized use is prohibited.
+        </p> 
+        {% endfor %}
+    </footer>
+</section>

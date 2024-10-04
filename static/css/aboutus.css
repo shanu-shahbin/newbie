@@ -1,0 +1,97 @@
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .container a {
+            text-decoration: none;
+            color: #007bff;  
+        }
+
+        h1 {
+            color: #16325b;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: monospace;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #000;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .numbers-section {
+            background-color: #16325b;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .numbers-section h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+        .numbers-section h7 {
+          font-size: 1rem;
+          color: #ffff11;
+          margin-bottom: 10px;
+          font-family: monospace;
+      }
+        .numbers-section .number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffff11;
+            margin: 20px 0;
+        }
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+            .numbers-section {
+                padding: 30px 15px;
+            }
+            .numbers-section h2 {
+                font-size: 1.75rem;
+            }
+            .numbers-section .number {
+                font-size: 2.5rem;
+            }
+        }
+        @media only screen and (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+            p {
+                font-size: 0.95rem;
+                margin-bottom: 10px;
+            }
+            .numbers-section {
+                padding: 20px 10px;
+            }
+            .numbers-section h2 {
+                font-size: 1.5rem;
+            }
+            .numbers-section .number {
+                font-size: 2rem;
+            }
+            a{
+                color: black;
+            }
+        } a:hover {
+            color: #16325b;
+          }
+          

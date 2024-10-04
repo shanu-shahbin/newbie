@@ -1,0 +1,48 @@
+.pagination {
+    padding: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex; /* Use flexbox for horizontal alignment */
+}
+
+.pagination li {
+    margin: 0 5px; /* Space between items */
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 10px 16px; /* Increased padding for a better clickable area */
+    color: #16325B;
+    font-weight: bold;
+    border: 2px solid #16325B;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    text-decoration: none;
+}
+
+.p8 .is-active {
+    background-color: #16325B; /* Active page background */
+    color: #fff; /* Active page text color */
+    padding: 10px;
+}
+
+.p8 a:hover {
+    color: #fff; /* Text color on hover */
+    background-color: #6e5fef; /* Darker shade on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .pagination a {
+        padding: 8px 12px; /* Adjust padding for smaller screens */
+        font-size: 14px; /* Adjust font size for better readability */
+    }
+}

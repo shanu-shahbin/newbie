@@ -1,0 +1,19 @@
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #fff;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+        width: 300px; /* Adjust width as needed */
+    }
+
+    /* Fade-out effect */
+    .fade-out {
+        opacity: 0; /* Make the logo transparent */
+    }

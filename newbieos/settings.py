@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-(!@rd#t*o-13arq$+mu024+%awip#-tl7qon^i^$=h6y@-6!67'
@@ -41,6 +42,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware", 
 ]
 
 JAZZMIN_SETTINGS = {
@@ -98,7 +100,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs/django_errors.log',
+            'filename': os.path.join(BASE_DIR, 'error.log'),
         },
     },
     'loggers': {
@@ -171,3 +173,5 @@ EMAIL_HOST_USER = 'newbieos.contact@gmail.com'
 EMAIL_HOST_PASSWORD = 'rged vvor jtdk pxhk'
 DEFAULT_FROM_EMAIL = 'newbieos.contact@gmail.com'
 ADMIN_EMAIL = 'newbieos.contact@gmail.com'
+
+
